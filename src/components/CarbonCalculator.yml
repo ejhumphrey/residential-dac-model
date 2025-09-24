@@ -1,0 +1,109 @@
+context: |
+  An updated model of a hub-and-spoke carbon capture transport system.
+  This version defines the distribution payload as a function of the total
+  carbon captured, using a scalable stoichiometric mass ratio (the "X factor").
+  Recovery payload is modeled using percentages of the vehicle's capacity
+  and cartridge saturation levels.
+
+inputs:
+  - name: Vehicle Type
+    description: >-
+      Defines the vehicle used for transport. This sets the unloaded/loaded
+      fuel economy and the CO2 emission factor.
+    type: Selection
+    values: ['Gasoline Truck', 'Electric Van']
+
+  - name: Maximum Vehicle Payload
+    description: "The maximum weight (in kg) the vehicle can legally and safely carry. This is a key constraint for all calculations."
+    type: Numeric
+    values: [1700, 1814, 2500]
+
+  - name: Recovery Truck Load Percentage
+    description: >-
+      How full the recovery truck is, expressed as a percentage of the
+      maximum number of cartridges it can physically carry.
+    type: Percentage
+    values: [0.50, 0.75, 1.0]
+
+  - name: Average Cartridge Saturation Percentage
+    description: >-
+      The average fullness of the reclaimed cartridges, as a percentage of
+      their maximum possible sorbent and carbon capacity.
+    type: Percentage
+    values: [0.70, 0.85, 1.0]
+
+  - name: Sorbent-to-Carbon Mass Ratio (X)
+    description: "The 'X factor' scaling the distribution payload. It's the mass of fresh sorbent required to capture one unit mass of carbon (e.g., a value of 3.3 means 3.3 kg of sorbent is needed per kg of captured carbon)."
+    type: Numeric
+    values: [1.0, 2.8, 3.3, 4.0, 5.0, 6.7]
+
+  - name: Distribution Packaging Fraction
+    description: "The weight of packaging for the fresh sorbent, as a percentage of the sorbent's weight."
+    type: Percentage
+    values: [0.05, 0.10, 0.20]
+
+  - name: Fully Saturated Cartridge Weight
+    description: "The 'design weight' (in kg) of a single cartridge when it is 100% saturated with captured material."
+    type: Numeric
+    values: [5, 10, 15, 20]
+
+  - name: Base Cartridge Weight
+    description: "The inert weight of a single, empty cartridge container (in kg)."
+    type: Numeric
+    values: [0.5, 1.0, 2.0]
+
+  - name: Max Carbon Ratio in Contents
+    description: >-
+      The theoretical best-case ratio (0 to 1) of a fully saturated
+      cartridge's contents that is pure elemental carbon.
+    type: Numeric
+    values: [0.05, 0.8, 0.11, 0.14, 0.17]
+
+  - name: Recovery Trip Distance
+    description: "The total round-trip distance for the reclamation trip (in miles)."
+    type: Numeric
+    values: [10, 25, 50, 100]
+
+  - name: Distribution Trip Distance
+    description: "The total round-trip distance for the distribution trip (in miles)."
+    type: Numeric
+    values: [10, 25, 50, 100]
+
+computed_values:
+  - name: Maximum Possible Cartridges
+    description: "The absolute maximum number of cartridges the truck can carry, calculated as: (Maximum Vehicle Payload / Fully Saturated Cartridge Weight)."
+  - name: Actual Number of Cartridges
+    description: "The number of cartridges on the current recovery trip, calculated as: (Maximum Possible Cartridges * Recovery Truck Load %)."
+  - name: Total Carbon Captured
+    description: >-
+      The total mass of carbon captured, which is a function of the actual number
+      of cartridges, their base/full weights, the max carbon ratio, and the
+      average saturation percentage.
+  - name: Total Recovery Payload
+    description: >-
+      The actual total weight of the recovery payload. This value is dynamic,
+      changing based on the number of cartridges and their average saturation level.
+  - name: Total Distribution Payload
+    description: >-
+      The actual total weight of the distribution payload, calculated as:
+      (Total Carbon Captured * Sorbent-to-Carbon Mass Ratio) * (1 + Distribution Packaging Fraction).
+  - name: Total Carbon Emissions
+    description: >-
+      The sum of carbon emitted from both the recovery and distribution trips,
+      calculated using their respective dynamic payloads, distances, and the
+      vehicle's efficiency model.
+
+outputs:
+  - name: Total Carbon Captured
+    description: >-
+      The total mass of elemental carbon successfully reclaimed and returned
+      to the hub by the recovery trip.
+  - name: Total Carbon Emissions
+    description: >-
+      The total mass of elemental carbon emitted by the transport vehicle
+      across both the distribution and recovery trips.
+  - name: Carbon ROI Ratio
+    description: >-
+      The final efficiency score, calculated as (Total Carbon Captured / Total
+      Carbon Emissions). A value greater than 1 indicates the transport process
+      is carbon-positive.

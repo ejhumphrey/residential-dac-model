@@ -1,0 +1,25 @@
+A vehicle returns to a carbon recovery with a payload of weight P_r.
+The payload weight P_r is shared evenly across a number of cartridges N_r, each with an average weight of C_ave.
+Each cartridge has a base (empty) weight of C_base.
+The remaining average weight of each cartridge is the contents C_contents = C_ave - C_base. 
+Some ratio R_carbon (0:1) of the cartridge contents is carbon; we can assume this is constant and not a function of cartridge fullness.
+R_carbon is a free parameter, based on the sorbent technology, its efficiency, etc. 
+The amount of Carbon captured C_captured is given by R_carbon * C_contents * N_r
+
+The vehicle has an emission factor F_e based on its fuel type (gasoline, diesel, electric) in kg CO2/(gallon | kwh).
+The vehicle has an average fuel economy E_ave measured in miles / (gallon | kwh), depending on fuel type. 
+The average fuel economy E_ave is a function of the unloaded economy of the vehicle, the inefficiency when fully loaded, and rate of weight change.
+The vehicle traveled D_r miles.
+The amount of Carbon Dioxide emitted in the carbon recovery CO2_recovery_emitted is E_ave * F_e * D_r. 
+The amount of Carbon emitted by the recovery trip C_recovery_emitted is given by CO2_recovery_emitted * (weight of C / weight of CO2)
+
+The same vehicle is also used to distribute fresh capture materials.
+This trip is D_d miles and leaves with a payload weight of P_d, carrying N_d packages. 
+Each package has some average weight W_ave.
+The amount of Carbon emitted, C_distribution_emitted, by this trip follows the same math as the recovery trip.
+
+The total carbon emissions are the sum of the recovery and distribution emissions.
+The distribution emissions relate to the recovery emissions by a scalar multiple X.
+The total carbon emissions is given by C_recovery_emitted + X * C_distribution_emitted
+The ROI Ratio is Total Carbon Captured / Total Carbon Emissions.
+
