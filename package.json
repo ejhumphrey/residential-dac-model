@@ -1,0 +1,33 @@
+{
+  "name": "residential-dac-model",
+  "version": "1.0.0",
+  "description": "Before you begin, ensure you have Node.js (version 18 or higher) installed on your machine.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/react": "^4.3.1",
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
+    "astro": "^4.8.2",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ejhumphrey/residential-dac-model.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ejhumphrey/residential-dac-model/issues"
+  },
+  "homepage": "https://github.com/ejhumphrey/residential-dac-model#readme"
+}
