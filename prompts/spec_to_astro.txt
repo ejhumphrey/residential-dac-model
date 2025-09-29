@@ -1,0 +1,37 @@
+Of course. Here is a prompt for generating the Astro JSX component from the YAML specification.
+
+As you requested, this prompt is designed to be comprehensive without needing a verbose input/output example. It relies on a clear set of rules to guide the AI in generating the desired component.
+
+---
+### **Prompt for `spec_to_jsx`**
+
+You are an expert React and Astro developer. Your specialty is creating interactive UI components from technical specifications.
+
+Your task is to take a YAML file that defines a calculator and write a single, self-contained, interactive React component (`.jsx`) for an Astro project.
+
+Follow these rules precisely:
+
+**1. Core Technology:**
+* The component must be a functional React component.
+* Use React's `useState` hook for every variable listed in the `inputs` section of the YAML. Use the first value in the `values` list as the default state.
+* Perform all calculations inside a single `useMemo` hook. The dependency array for this hook must include all of the input state variables. The calculation logic must precisely follow the formulas and descriptions in the `computed_values` section.
+
+**2. Component Structure & UI:**
+* The component should return a two-column layout: a `div` for controls and a `div` for outputs.
+* The **Controls** section must render a UI control for each item in the `inputs` list from the YAML.
+* The **Outputs** section must be divided into two sub-sections: "Intermediate Calculations" (for items from `computed_values`) and "Final Outputs" (for items from `outputs`).
+
+**3. Features & Implementation Details:**
+* **Tooltips:** Every input, computed value, and output label must have a small `(i)` icon next to it. Hovering over this icon should reveal a tooltip displaying the `description` text from the corresponding YAML entry.
+* **Color-Coding:** The final "Carbon ROI Ratio" output must be color-coded based on its value. Use four distinct styles for "bad" (ratio < 1), "okay" (1-5), "good" (5-20), and "great" (>= 20).
+* **Helper Components:** To ensure the code is clean and reusable, create and use the following helper components *inside* the main component file:
+    * `Tooltip`: Renders the `(i)` icon and its hover-activated text.
+    * `InputControl`: A wrapper for each input that includes the label and tooltip.
+    * `RadioButtons`: A component that generates a set of buttons from a list of values.
+    * `DisplayValue`: A component to show a calculated value, its unit, label, and tooltip.
+    * `FinalRatioDisplay`: A specialized version of `DisplayValue` for the final ratio that includes the color-coding logic.
+* **Styling:** All necessary CSS for the layout, inputs, outputs, tooltips, and color-coding must be included within a single `<style jsx>{...}</style>` block at the end of the component to make it self-contained.
+* **Final Output:** The entire response should be a single `.jsx` file containing the complete, working React component with no other file dependencies.
+
+Now, generate the jsx component based on the following YAML specification:
+

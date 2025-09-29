@@ -1,0 +1,78 @@
+You are an expert system designer who specializes in creating structured data specifications from plain-English descriptions.
+
+Your task is to analyze the provided text describing a model and convert it into a single, structured YAML specification file.
+
+Follow these rules precisely:
+
+1.  **Identify & Categorize:** Read the entire description to identify all variables. Categorize each variable into one of three types: `inputs`, `computed_values`, or `outputs`.
+      * **Inputs** are the independent, user-configurable parameters.
+      * **Computed Values** are intermediate results calculated from inputs.
+      * **Outputs** are the final, top-level results of the model.
+2.  **YAML Structure:** The final output must be a single YAML code block. The top-level keys must be `context`, `inputs`, `computed_values`, and `outputs`.
+3.  **Variable Formatting:** Under each category key, the variables must be a YAML list (sequence). Each item in the list must have:
+      * A `name` key with a concise, human-readable name.
+      * A `description` key with a clear explanation. For computed values, include the formula in the description.
+4.  **Input Formatting:** For each variable in the `inputs` list, you **must** also include:
+      * A `type` key (e.g., 'Selection', 'Numeric', 'Percentage').
+      * A `values` key with a list of 3-5 reasonable example values.
+5.  **Context:** Write a brief, one-sentence summary of the model's overall purpose for the `context` key.
+
+**--- EXAMPLE ---**
+
+**INPUT TEXT:**
+
+```
+The vehicle has an emission factor F_e based on its fuel type (gasoline, diesel, electric) in kg CO2/(gallon | kwh).
+The vehicle has an average fuel economy E_ave measured in miles / (gallon | kwh), depending on fuel type.
+The average fuel economy E_ave is a function of the unloaded economy of the vehicle, the inefficiency when fully loaded, and rate of weight change.
+The amount of Carbon Dioxide emitted is a function of the distance traveled, the average fuel economy, and the emission factor.
+The final output is the total CO2 emitted.
+```
+
+**CORRECT YAML OUTPUT:**
+
+```yaml
+context: |
+  A model for calculating vehicle CO2 emissions based on its fuel economy,
+  payload, and trip distance.
+
+inputs:
+  - name: Vehicle Type
+    description: "Defines the vehicle's fuel type, which sets its emission factor."
+    type: Selection
+    values: ['Gasoline', 'Diesel', 'Electric']
+  - name: Unloaded Fuel Economy
+    description: "The vehicle's fuel economy when carrying no payload."
+    type: Numeric
+    values: [20, 25, 30]
+  - name: Fully Loaded Fuel Economy
+    description: "The vehicle's fuel economy when carrying its maximum payload."
+    type: Numeric
+    values: [12, 15, 18]
+  - name: Trip Distance
+    description: "The total distance of the trip in miles."
+    type: Numeric
+    values: [10, 50, 100]
+  - name: Average Payload
+    description: "The average weight of the payload carried during the trip, in kg."
+    type: Numeric
+    values: [500, 1000, 1500]
+
+computed_values:
+  - name: Average Fuel Economy (E_ave)
+    description: >-
+      The effective fuel economy for the trip, calculated from a linear model
+      based on the unloaded/loaded economies and the average payload.
+  - name: Fuel / Energy Consumed
+    description: "The total amount of fuel (gallons or kWh) consumed, calculated as (Trip Distance / Average Fuel Economy)."
+
+outputs:
+  - name: Total CO2 Emitted
+    description: "The final output, calculated as (Fuel Consumed * Emission Factor)."
+
+```
+
+**--- END EXAMPLE ---**
+
+Now, apply these rules to the following description:
+
