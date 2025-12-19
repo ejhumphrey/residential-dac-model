@@ -1,8 +1,22 @@
-\documentclass{article}
+\documentclass[english]{article}
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, breaklinks=true]{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    citecolor=blue,
+    pdfauthor={Rishu Agarwal, Maarten Bosum, Nathaniel Granor, Eric J. Humphrey, Jessica Maderos},
+    pdfkeywords={Direct Air Capture, DAC, Climate Change, Carbon Removal, Techno-Economic Analysis, Residential DAC}
+}
+\usepackage[
+    type={CC},
+    modifier={by},
+    version={4.0}
+]{doclicense}
 \usepackage{amsmath}
 \usepackage{geometry}
 \usepackage{xurl}  % better automatic URL line breaks
-\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, breaklinks=true]{hyperref}
 \usepackage{enumitem}
 % Required Packages
 \usepackage[utf8]{inputenc}
@@ -38,39 +52,43 @@
 \usepackage{authblk}    % For author formatting
 \usepackage{caption}
 
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    filecolor=magenta,      
-    urlcolor=cyan,
-    citecolor=blue,
-}
+
 
 
 \geometry{a4paper, margin=1in}
-\title{CarbonCloud - Feasibility Study}
-\subtitle{A Distributed Residential Direct Air Capture Concept}
 
-\author{%
-  Rishu Agarwal\textsuperscript{1},
-  Maarten Bosum\textsuperscript{2},
-  Nathaniel Granor\textsuperscript{3},
-  Eric J. Humphrey\textsuperscript{4},
-  Jessica Maderos\textsuperscript{5}\\
-  \textsuperscript{1}\texttt{arishu31@gmail.com},
-  \textsuperscript{2}\texttt{maartenbosum@gmail.com},
-  \textsuperscript{3}\texttt{nathaniel.granor@gmail.com},
-  \textsuperscript{4}\texttt{humphrey.eric@gmail.com},
-  \textsuperscript{5}\texttt{jessica.maderos@gmail.com}%
-}
+\title{CarbonCloud: A Techno-Economic Analysis of a Distributed Residential Direct Air Capture Model}
 
-\date{December 12, 2025}
+\author[1]{Rishu Agarwal}
+\author[2]{Maarten Bosum}
+\author[3]{Nathaniel Granor}
+\author[4]{Eric J. Humphrey}
+\author[5]{Jessica Maderos}
+
+\affil[1,2,3,4,5]{Independent Researchers}
+\affil[1]{arishu31@gmail.com}
+\affil[2]{maartenbosum@gmail.com}
+\affil[3]{nathaniel.granor@gmail.com}
+\affil[4]{humphrey.eric@gmail.com}
+\affil[5]{jessica.maderos@gmail.com}
+
+\date{December 18, 2025}
 
 \begin{document}
-
+\vspace*{15em}
 
 \maketitle
+\vfill % Pushes the following block to the bottom of the page
 
+\begin{flushleft}
+        \footnotesize
+        \doclicenseThis % Generates icon + "This work is licensed under..."
+        \vspace{2mm}
+        \textbf{Copyright:} \copyright\ 2025 The Authors. \\
+        \textbf{Digital Object Identifier (DOI):} \href{https://doi.org/10.5281/zenodo.17979421}{https://doi.org/10.5281/zenodo.17979421} \\
+    \end{flushleft}
+
+\newpage
 
 \begin{abstract}
 This work explores addressing the dual challenge of gigaton-scale Carbon Dioxide Removal (CDR) and increasing economic pressure on homeowners as a complementary opportunity: a decentralized Direct Air Capture (DAC) network utilizing the existing HVAC infrastructure found in 75\% of American homes that incentivizes participation by creating passive income for homeowners.
@@ -520,7 +538,7 @@ Substituting these values yields the hourly addressable mass flux per household:
     \dot{m}_{avail} = 412 \cdot 0.5 \cdot (0.001 - 0.00028) \cdot 1.84 \approx 0.273 \, kg/h
 \end{equation}
 
-Extrapolating this flux over one year ($8,760$ hours) for the total count of U.S. households ($132.2$ million) \cite{fred2024households}, we estimate the total addressable residential \ce{CO2} potential to be $316MMT, shown in Table \ref{tab:co2_estimates}.
+Extrapolating this flux over one year ($8,760$ hours) for the total count of U.S. households ($132.2$ million) \cite{fred2024households}, we estimate the total addressable residential \ce{CO2} potential to be $316MMT$, shown in Table \ref{tab:co2_estimates}.
 
 \begin{table}[h]
     \centering
@@ -798,7 +816,7 @@ By marketing the device as a best-in-class air purifier that removes VOCs, aller
 
 \section{Acknowledgements}
 
-The authors graciously thank the Climatebase Fellowship for their support in pursuing this work, and the broader Fellowship community for ample feedback and excitement. 
+The authors graciously thank the Climatebase Fellowship for their support in pursuing this work, and the broader Fellowship community for ample feedback and excitement. The authors also thank Paul Gross of Remora Carbon for taking the time to share his perspective on the current state of the art of carbon capture technology. 
 
 \begin{thebibliography}{99}
     \bibitem{ieefa2022} 
